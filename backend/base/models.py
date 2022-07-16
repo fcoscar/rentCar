@@ -1,40 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class CarTypes(models.Model):
-    name = models.CharField(max_length=200, null=True, blank=True)
-
-    def __str__(self):
-        return self.name
-
-class CarBrands(models.Model):
-    name = models.CharField(max_length=200, null=True, blank=True)
-
-    def __str__(self):
-        return self.name
-
-class CarModels(models.Model):
-    name = models.CharField(max_length=200, null=True, blank=True)
-    carBrand = models.ForeignKey(CarBrands, max_length=200, null=True, blank=True, on_delete=models.SET_NULL)
-
-    def __str__(self):
-        return self.name
-
-class Locations(models.Model):
-    name = models.CharField(max_length=200, null=True, blank=True)
-
-    def __str__(self):
-        return self.name
-
 class Car(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     name = models.CharField(max_length=200, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
-    type = models.ForeignKey(CarTypes, max_length=100, null=True, blank=True, on_delete=models.SET_NULL)
-    brand = models.ForeignKey(CarBrands, max_length=100, null=True, blank=True, on_delete=models.SET_NULL)
-    model = models.ForeignKey(CarModels, max_length=100, null=True, blank=True, on_delete=models.SET_NULL)
+    type = models.CharField(max_length=100, null=True, blank=True, )
+    brand = models.CharField(max_length=100, null=True, blank=True,)
+    model = models.CharField(max_length=100, null=True, blank=True, )
     year = models.IntegerField(null=True, blank=True)
-    location = models.ForeignKey(Locations, max_length=100, null=True, blank=True, on_delete=models.SET_NULL)
+    location = models.CharField(max_length=100, null=True, blank=True, )
     exterior = models.CharField(max_length=200, null=True, blank=True)
     interior = models.CharField(max_length=200, null=True, blank=True)
     combustible = models.CharField(max_length=200, null=True, blank=True)
