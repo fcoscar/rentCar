@@ -10,7 +10,7 @@ urlpatterns = [
     path('users/login/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('all', views.getAllCars),
-    path('<str:brand>/', views.getCarsByBrand),
+    path('<str:brand>', views.getCarsByBrand),
     path('<str:brand>/<str:model>', views.getCarsByBrandAndModel),
     path('<str:tipo>/', views.getCarsByType),
     path('<str:zone>', views.getCarsByZone),

@@ -4,6 +4,8 @@ from rest_framework.response import Response
 from .serializers import *
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
+from django.db.models import Q
+
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -54,7 +56,10 @@ def createUser(request):
 
 @api_view(['GET'])
 def getAllCars(request):
-    cars = Car.objects.all()
+    q = request.GET.get('q') if request.GET.get('q') is not None else ''
+    cars = Car.objects.filter(
+        Q(brand__icontains=q)
+    )
     serializer = CarSerializer(cars, many=True)
     return Response(serializer.data)
 
