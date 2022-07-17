@@ -2,21 +2,19 @@ import React, {useEffect} from 'react'
 import {getAll} from '../actions/car'
 import { useDispatch, useSelector } from 'react-redux'
 import Cards from '../components/Cards'
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/outline'
 import { useSearchParams }from 'react-router-dom'
-import { queryAllByAttribute } from '@testing-library/react'
-
+import Loader from '../components/Loader'
 
 function HomePage() {
     const dispatch = useDispatch()
     const carros = useSelector(state => state.cars)
-    const {error, loading, cars, brands } = carros
+    const {loading, cars} = carros
     const [searchParams] = useSearchParams()
-    const q = searchParams.get('q')
+    const brand = searchParams.get('brand')
 
     useEffect(() => {          
-      dispatch(getAll(q))  
-    }, [dispatch])
+      dispatch(getAll(brand))  
+    }, [dispatch, brand])
 
     // const slideLeft = () => {
     //   var slider = document.getElementById('slider')
@@ -43,14 +41,18 @@ function HomePage() {
         <ChevronRightIcon className='h-7 w-7 mt-3 cursor-pointer text-gray-600  hover:text-black opacity-50 pb-3' onClick={slideRight}/>
         </div> */}
 
-
-        <div className='grid  sm:grid-cols-3 lg:grid-cols-5'>
+        {loading ? (
+          <Loader />
+        ) : (
+          <div className='grid sm:grid-cols-3 lg:grid-cols-5  '>
           {cars.map(car => 
           <div key={car.id}>
             <Cards car={car}/>
           </div>
           )}          
         </div>
+        )}
+
     </section>
  
   )

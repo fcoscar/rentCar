@@ -8,6 +8,7 @@ from .views import MyTokenObtainPairView
 urlpatterns = [
     path('', views.getRoutes),
     path('users/login/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('users/register/', views.createUser),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('all', views.getAllCars),
     path('<str:brand>', views.getCarsByBrand),

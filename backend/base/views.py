@@ -44,6 +44,7 @@ def getRoutes(request):
 @api_view(['POST'])
 def createUser(request):
     data = request.data
+    print(data)
     user = User.objects.create(
         first_name=data['first_name'],
         last_name=data['last_name'],
@@ -56,12 +57,18 @@ def createUser(request):
 
 @api_view(['GET'])
 def getAllCars(request):
-    q = request.GET.get('q') if request.GET.get('q') is not None else ''
-    cars = Car.objects.filter(
-        Q(brand__icontains=q)
-    )
-    serializer = CarSerializer(cars, many=True)
-    return Response(serializer.data)
+    brand = request.GET.get('brand') if request.GET.get('brand') is not None else ''
+    if brand == 'All':
+        cars = Car.objects.all()
+        serializer = CarSerializer(cars, many=True)
+        return Response(serializer.data)
+
+    else:
+        cars = Car.objects.filter(
+            Q(brand__icontains=brand)
+        )
+        serializer = CarSerializer(cars, many=True)
+        return Response(serializer.data)
 
 @api_view(['GET'])
 def getCarsByBrand(request, brand):

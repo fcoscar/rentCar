@@ -1,11 +1,11 @@
 import { CAR_FAIL, CAR_REQUEST, CAR_SUCCESS, CAR_BRANDS_SUCCES} from '../constants/carConstants'
 
-export const getAll = (q) => async (dispatch) => {
+export const getAll = (brand) => async (dispatch) => {
     try {
         
         dispatch({type:CAR_REQUEST})
                 
-        const response = q ? await fetch(`http://localhost:8000/api/all?q=${q}`) 
+        const response = brand ? await fetch(`http://localhost:8000/api/all?brand=${brand}`) 
         : await fetch(`http://localhost:8000/api/all`)      
         const data = await response.json()
 
@@ -26,12 +26,14 @@ export const getAll = (q) => async (dispatch) => {
 
 }
 
-export const getBrands = () => async (dispatch) => {
+export const getBrands = () => async (dispatch, useSelector) => {
     const response2 = await fetch(`http://localhost:8000/api/all`)
     const data2 = await response2.json()
-    
-    
-    const brands = [...new Set(data2.map(car => car.brand))].sort()  
+
+    const brandsList = [...new Set(data2.map(car => car.brand))].sort()
+    const brandAll =  'All'
+    const brands = [brandAll].concat(brandsList)
+
 
     dispatch({
         type: CAR_BRANDS_SUCCES,

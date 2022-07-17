@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import LoginPage from './pages/LoginPage';
+import SignUpPage from './pages/SignUpPage';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path='/' element={<HomePage />} exact/>
         <Route path='/login' element={<LoginPage />} />
+        <Route path='/signup' element={<SignUpPage />} />
       </Routes>
     </Router>
   );

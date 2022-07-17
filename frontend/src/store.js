@@ -10,13 +10,17 @@ import { userLoginReducer } from './reducers/userReducer'
 
     const userInfoFromStorage = localStorage.getItem('userInfo') ? 
         JSON.parse(localStorage.getItem('userInfo')) : null
+
+    const brandsFromStorage = localStorage.getItem('brands') ? 
+        JSON.parse(localStorage.getItem('brands')) : []
         
     const initialState = {
-        userLogin: {userInfo:userInfoFromStorage}
+        userLogin: {userInfo:userInfoFromStorage},
+        cars: {brands:brandsFromStorage, cars:[]},
     }    
     
     const store = configureStore({
+        preloadedState: initialState,
         reducer,
-        preloadedState: initialState
     })
 export default store
