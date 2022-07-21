@@ -1,11 +1,12 @@
 import {combineReducers} from 'redux'
 import { configureStore } from '@reduxjs/toolkit'
-import { carReducer } from './reducers/carReducer'
+import { carDetailsReducer, carReducer } from './reducers/carReducer'
 import { userLoginReducer } from './reducers/userReducer'
     
     const reducer = combineReducers({
         cars : carReducer,
-        userLogin: userLoginReducer
+        userLogin: userLoginReducer,
+        carDetails: carDetailsReducer,
     })
 
     const userInfoFromStorage = localStorage.getItem('userInfo') ? 

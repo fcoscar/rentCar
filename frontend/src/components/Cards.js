@@ -2,20 +2,22 @@ import React from 'react'
 
 function Cards({car}) {
   return (
-    <div className='m-2 mt-5 space-x-1 cursor-pointer hover:scale-105 transition transform duration-200 ease-out'>
-        <div className='rounded-md'>
-            <img src={ `images${car.image}`} alt='' className='px-5' />      
+    <a href={`/cars/${car.id}`} target="_blank" >
+    <div className='mt-5  space-x-1 cursor-pointer hover:scale-105 transition transform duration-200 ease-out'>
+        <div className='flex justify-center items-center'>
+            <img src={ `${car.image}`} alt='' className='rounded'/>      
         </div>
-        <div className='overflow-hidden  font-bold px-4  mt'>
+        <div className='text-md font-semibold whitespace-normal overflow-hidden text-black'>
             {car.name}   
         </div>
-        <div className='text-xs whitespace-normal overflow-hidden px-4  text-gray-500'>
+        <div className='text-xs whitespace-normal overflow-hidden text-gray-500'>
             {car.location} - {car.year} - {car.combustible}   
         </div>
-        <div className='text-xs whitespace-normal overflow-hidden px-4  text-black font-bold'>
+        <div className='text-xs whitespace-normal overflow-hidden text-black font-bold'>
             ${car.price} / Dia  
         </div>
     </div>
+    </a>
   )
 }
 

@@ -93,3 +93,9 @@ def getCarsByZone(request, zone):
     cars = Car.objects.filter(location=zone)
     serializer = CarSerializer(cars, many=True)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def getCarById(request, pk):
+    car = Car.objects.get(id=pk)
+    serializer = CarSerializer(car, many=False)
+    return Response(serializer.data)

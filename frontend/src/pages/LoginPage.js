@@ -38,7 +38,7 @@ function LoginPage() {
                 onChange={(e)=> setPassword(e.target.value)}
                 />
                 <button type='submit' className='w-full rounded-full py-2 text-xs uppercase font-bold tracking-wider border-black border-2 hover:bg-gray-100 transition-colors' >Entrar</button>
-                <span>Aun no tienes una cuenta? <a href='/singup' className='underline '>Registrate</a></span>
+                <span>Aun no tienes una cuenta? <a href='/signup' className='underline '>Registrate</a></span>
             </div>
         </form>
 

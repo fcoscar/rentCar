@@ -13,6 +13,7 @@ urlpatterns = [
     path('all', views.getAllCars),
     path('<str:brand>', views.getCarsByBrand),
     path('<str:brand>/<str:model>', views.getCarsByBrandAndModel),
+    path('cars/<str:pk>/', views.getCarById),
     path('<str:tipo>/', views.getCarsByType),
     path('<str:zone>', views.getCarsByZone),
 

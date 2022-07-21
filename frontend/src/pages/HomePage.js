@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Cards from '../components/Cards'
 import { useSearchParams }from 'react-router-dom'
 import Loader from '../components/Loader'
+import Skeleton from '../components/Skeleton'
 
 function HomePage() {
     const dispatch = useDispatch()
@@ -14,7 +15,7 @@ function HomePage() {
 
     useEffect(() => {          
       dispatch(getAll(brand))  
-    }, [dispatch, brand])
+    }, [brand])
 
     // const slideLeft = () => {
     //   var slider = document.getElementById('slider')
@@ -28,7 +29,7 @@ function HomePage() {
 
   return (   
     <section className='pt-4'>
-        <h2 className='text-4xl font-semibold px-4'>Encuentra un vehiculo</h2>        
+        <h2 className='text-4xl font-semibold px-4 ml-12'>Encuentra un vehiculo</h2>        
         {/* <div className='flex items-center sticky top-14 z-50 text-center bg-white border-b-1 shadow-sm h-8 border-b-1 border-gray-100 '>
         <ChevronLeftIcon className='h-7 w-7 mt-3 cursor-pointer text-gray-600  hover:text-black opacity-50 pb-3' onClick={slideLeft}/>        
         <div id='slider' className='flex overflow-x-scroll scroll-smooth scrollbar-hide items-center text-center pb-3'>
@@ -42,11 +43,22 @@ function HomePage() {
         </div> */}
 
         {loading ? (
-          <Loader />
+          <div className='grid sm:grid-cols-3 lg:grid-cols-4 ml-10 mr-14 '>
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+          </div>
         ) : (
-          <div className='grid sm:grid-cols-3 lg:grid-cols-5  '>
+          <div className='grid sm:grid-cols-3 lg:grid-cols-4 ml-10 mr-14'>
           {cars.map(car => 
-          <div key={car.id}>
+          <div key={car.id} className='ml-5' >
             <Cards car={car}/>
           </div>
           )}          
