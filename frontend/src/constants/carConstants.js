@@ -7,6 +7,14 @@ export const CAR_DETAILS_SUCCESS = 'CAR_DETAILS_SUCCESS'
 export const CAR_DETAILS_REQUEST = 'CAR_DETAILS_REQUEST'
 export const CAR_DETAILS_FAIL = 'CAR_DETAILS_FAIL'
 
+export const CAR_CREATE_SUCCESS = 'CAR_CREATE_SUCCESS'
+export const CAR_CREATE_REQUEST = 'CAR_CREATE_REQUEST'
+export const CAR_CREATE_FAIL = 'CAR_CREATE_FAIL'
+
+export const CAR_GET_UPDATE_IMAGE_FAIL = 'CAR_GET_UPDATE_IMAGE_FAIL'
+export const CAR_GET_UPDATE_IMAGE_SUCCESS = 'CAR_GET_UPDATE_IMAGE_SUCCESS'
+export const CAR_GET_UPDATE_IMAGE_REQUEST = 'CAR_GET_UPDATE_IMAGE_REQUEST'
+
 export const vehicleTypes = ['Jeepeta', 'Sedan', 'Motor', 'Barco', 'Camioneta', 'Coupe/Sport', 'Autobus', 'Camion']
 
  export const provincias = ['', 'Azua',

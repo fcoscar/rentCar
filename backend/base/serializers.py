@@ -42,3 +42,8 @@ class ReservationsSerializer(ModelSerializer):
     class Meta:
         model = Reservation
         fields = '__all__'
+
+class ImageSerializer(ModelSerializer):
+    class Meta:
+        model = Image
+        fields = '__all__'

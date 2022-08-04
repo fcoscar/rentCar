@@ -1,7 +1,10 @@
 import { 
     CAR_FAIL, CAR_REQUEST, CAR_SUCCESS, 
     CAR_BRANDS_SUCCES,
-    CAR_DETAILS_FAIL, CAR_DETAILS_REQUEST, CAR_DETAILS_SUCCESS
+    CAR_DETAILS_FAIL, CAR_DETAILS_REQUEST, CAR_DETAILS_SUCCESS,
+    CAR_CREATE_FAIL, CAR_CREATE_REQUEST, CAR_CREATE_SUCCESS,
+    CAR_GET_UPDATE_IMAGE_FAIL, CAR_GET_UPDATE_IMAGE_SUCCESS, CAR_GET_UPDATE_IMAGE_REQUEST
+
 } from '../constants/carConstants'
 
 export const getAll = (brand) => async (dispatch) => {
@@ -9,15 +12,13 @@ export const getAll = (brand) => async (dispatch) => {
         
         dispatch({type:CAR_REQUEST})
                 
-        const response = brand ? await fetch(`http://localhost:8000/api/all?brand=${brand}`) 
-        : await fetch(`http://localhost:8000/api/all`)      
+        const response = brand ? await fetch(`/all?brand=${brand}`) 
+        : await fetch(`/all`)      
         const data = await response.json()
-
         dispatch({
             type: CAR_SUCCESS,
             payload: data
         })
-
 
     } catch (error) {
         dispatch({
@@ -27,17 +28,12 @@ export const getAll = (brand) => async (dispatch) => {
         })
     }
     
-
 }
 
 export const getBrands = () => async (dispatch, useSelector) => {
-    const response2 = await fetch(`http://localhost:8000/api/all`)
+    const response2 = await fetch(`/brands`)
     const data2 = await response2.json()
-
-    const brandsList = [...new Set(data2.map(car => car.brand))].sort()
-    const brandAll =  'All'
-    const brands = [brandAll].concat(brandsList)
-
+    const brands = ['All'].concat(data2)
 
     dispatch({
         type: CAR_BRANDS_SUCCES,
@@ -52,7 +48,7 @@ export const getCarById = (id) => async (dispatch) => {
             type: CAR_DETAILS_REQUEST
         })
         
-        const response = await fetch(`/cars/${id}/`)
+        const response = await fetch(`/car/${id}/`)
         const data = await response.json()
 
         dispatch({
@@ -67,5 +63,82 @@ export const getCarById = (id) => async (dispatch) => {
         })     
     }
 
+
+}
+
+export const createCar = (type,brand,model,location,combustible,price,year) => async (dispatch, getState, navigate) => {
+    try {
+        dispatch({
+            type: CAR_CREATE_REQUEST
+        })
+
+        const { userLogin: {userInfo} } = getState()
+        const token = 'Bearer ' + userInfo.token
+
+        const request = await fetch('car/register/' , {
+            method: 'POST',
+            body: JSON.stringify(
+                {
+                    brand: brand,
+                    location: location,
+                    model: model,
+                    type: type,
+                    price: price,
+                    combustible: combustible,
+                    year: year,
+                }
+            ),
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': token
+            }
+        })
+        const data = await request.json()
+        console.log(data)
+        dispatch({
+            type: CAR_CREATE_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type:CAR_CREATE_FAIL,
+            payload: error.response && error.response.data.message
+            ? error.response.data.message : error.message
+        })   
+    }
+} 
+
+export const getCarCreated = () => async (dispatch, getState) => {
+    try {
+
+        dispatch({
+            type: CAR_GET_UPDATE_IMAGE_REQUEST
+        })
+
+        const { userLogin: {userInfo} } = getState()
+        const token = 'Bearer ' + userInfo.token
+
+        const request = await fetch('car/register/update-image' , {
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': token
+            }
+        })
+        const data = await request.json()
+        console.log(data)
+
+        dispatch({
+            type: CAR_GET_UPDATE_IMAGE_SUCCESS,
+            payload: data
+        })
+        
+    } catch (error) {
+        dispatch({
+            type:CAR_GET_UPDATE_IMAGE_FAIL,
+            payload: error.response && error.response.data.message
+            ? error.response.data.message : error.message
+        })   
+    }
+    
 
 }

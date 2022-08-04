@@ -1,11 +1,11 @@
 import React from 'react'
 
-function Cards({car}) {
-  return (
-    <a href={`/cars/${car.id}`} target="_blank" >
-    <div className='mt-5  space-x-1 cursor-pointer hover:scale-105 transition transform duration-200 ease-out'>
+function Cards({car, image}) {
+  return ( 
+    <a href={`/car/${car.id}`} target="_blank" >
+    <div className='mt-5 space-x-1 cursor-pointer hover:scale-105 transition transform duration-200 ease-out'>
         <div className='flex justify-center items-center'>
-            <img src={ `${car.image}`} alt='' className='rounded'/>      
+            <img src={image.image} alt='' className='rounded'/>      
         </div>
         <div className='text-md font-semibold whitespace-normal overflow-hidden text-black'>
             {car.name}   

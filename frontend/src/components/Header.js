@@ -3,7 +3,7 @@ import { MenuIcon, SearchCircleIcon, UserCircleIcon } from '@heroicons/react/sol
 import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '../actions/userActions'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/outline'
-import { getBrands } from '../actions/car'
+import { createCar, getBrands } from '../actions/car'
 import { AdjustmentsIcon } from '@heroicons/react/outline'
 import { DateRange } from 'react-date-range'
 import 'react-date-range/dist/styles.css';
@@ -105,7 +105,7 @@ function Header() {
 
       <div className='bg-neutral-50 flex justify-between flex-nowrap space px-4 py-3 shadow-sm border-y '>
       <div> 
-        <a href='/'> <img className='relative h-10 w-20 ml-12' src='images/W.jpg' alt=''/></a>
+        <a href='/'> <img className='relative h-10 w-20 ml-12' src='/images/W.jpg' alt=''/></a>
       </div>
       {/* <form className='flex flex-1 items-center space-x-2 rounded-xl border border-gray-500 bg-gray-100 px-3 py-1'>
         <input 
@@ -136,8 +136,8 @@ function Header() {
             {dropdown ? (
                           <div class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg z-10 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-49" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
                           <div class="py-1" role="none">
-                            <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0">Cuenta</a>
-                            <a href="/list-car" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-1">Alquila tu vehiculo</a>
+                            <a href="/" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0">Cuenta</a>
+                            <a href='/list-car' class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-1">Alquila tu vehiculo</a>
                             <form method="POST" action="#" role="none">
                               <button onClick={btnHandler} type="submit" class="text-gray-700 block w-full text-left px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-3">Cerrar Sesion</button>
                             </form>
@@ -177,9 +177,9 @@ function Header() {
 
       {location ? (
             <div className='w-screen flex justify-center'>
-            <div className='grid grid-cols-5 space-y-5 bg-white mt-0 fixed z-10 border-gray-300 border rounded-xl'>
+            <div className='grid grid-cols-5 space-y-5 bg-white fixed z-10 border-gray-300 border rounded-xl'>
               {provincias.map((provincia, id,) => (
-                <button className='m-2 mt-5 text-xs uppercase font-semibold tracking-wider hover:text-gray-400' key={id} onClick={() => handleLoc(provincia)} value={provincia}>{provincia}</button>
+                <button className='m-2 text-xs uppercase font-semibold tracking-wider hover:text-gray-400 pb-2' key={id} onClick={() => handleLoc(provincia)} value={provincia}>{provincia}</button>
               ))}
           </div>
           </div>
@@ -187,13 +187,13 @@ function Header() {
 
 
       <div className='border-b-1 border-gray-100'>
-      <div className='flex items-center sticky top-14 text-center bg-white border-b-1 shadow-sm h-8  ml-10 '>
+      <div className='flex items-center sticky top-14 text-center bg-white border-b-1 shadow-sm h-8'>
         
-        <ChevronLeftIcon className='h-12 w-12 mt-3 cursor-pointer text-gray-600  hover:text-black opacity-50 pb-3 ml-4' onClick={slideLeft}/>        
+        <ChevronLeftIcon className='h-12 w-12 mt-3 cursor-pointer text-gray-600  hover:text-black opacity-50 pb-3 ml-14' onClick={slideLeft}/>        
         <div id='slider' className='flex overflow-x-scroll scroll-smooth scrollbar-hide items-center text-center pb-3'>
           
-          {brands?.map((brand) => 
-            <a className='mx-9 mt-3 text-gray-600 text-xs uppercase font-bold tracking-wider cursor-pointer hover:text-black hover:border-b-2 ease-out whitespace-nowrap' href={`/?brand=${brand}`} key={brand}><h1>{brand}</h1></a>
+          {brands?.map((brand, id) => 
+            <a className='mx-9 mt-3 text-gray-600 text-xs uppercase font-bold tracking-wider cursor-pointer hover:text-black hover:border-b-2 ease-out whitespace-nowrap' href={`/?brand=${brand}`} key={id}><h1>{brand}</h1></a>
 
           )}
         </div>

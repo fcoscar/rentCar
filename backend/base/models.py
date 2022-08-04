@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 class Car(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     name = models.CharField(max_length=200, null=True, blank=True)
-    image = models.ImageField(null=True, blank=True)
     type = models.CharField(max_length=100, null=True, blank=True, )
     brand = models.CharField(max_length=100, null=True, blank=True,)
     model = models.CharField(max_length=100, null=True, blank=True, )
@@ -22,6 +21,9 @@ class Car(models.Model):
     description = models.TextField(null=True, blank=True)
     rating = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
     numReviews = models.IntegerField(null=True, blank=True, default=0)
+
+    class Meta:
+        ordering = ['-id']
 
     def __str__(self):
         return self.name
@@ -47,3 +49,13 @@ class Review(models.Model):
     def __str__(self):
         return str(self.rating)
 
+class Image(models.Model):
+    car = models.ForeignKey(Car, on_delete=models.CASCADE)
+    image = models.ImageField(null=True, blank=True)
+
+    class Meta:
+        ordering = ['-car_id']
+
+
+    def __str__(self):
+        return str(self.car.name)

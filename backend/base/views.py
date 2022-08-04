@@ -44,7 +44,6 @@ def getRoutes(request):
 @api_view(['POST'])
 def createUser(request):
     data = request.data
-    print(data)
     user = User.objects.create(
         first_name=data['first_name'],
         last_name=data['last_name'],
@@ -55,20 +54,60 @@ def createUser(request):
     serializer = UserSerializerWithToken(user, many=False)
     return Response(serializer.data)
 
+@api_view(['POST'])
+def createCar(request):
+    data = request.data
+    user = request.user
+    car = Car.objects.create(
+        user = user,
+        name = data['brand'] + ' ' + data['model'],
+        brand = data['brand'],
+        location = data['location'],
+        year = data['year'],
+        price = data['price'],
+        combustible = data['combustible'],
+        type = data['type']
+    )
+    serializer = CarSerializer(car, many=False)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def updateCar(request):
+    user = request.user
+    car = Car.objects.filter(user__username=user.username)[0]
+    serializer = CarSerializer(car, many=False)
+
+    return Response(serializer.data)
+
 @api_view(['GET'])
 def getAllCars(request):
     brand = request.GET.get('brand') if request.GET.get('brand') is not None else ''
     if brand == 'All':
-        cars = Car.objects.all()
+        cars = Car.objects.all().order_by('-id')
+        images = Image.objects.all().order_by('-car_id')
         serializer = CarSerializer(cars, many=True)
-        return Response(serializer.data)
+        serializer2 = ImageSerializer(images, many=True)
+        serializerList = [serializer.data, serializer2.data]
+        return Response(serializerList)
 
     else:
         cars = Car.objects.filter(
             Q(brand__icontains=brand)
         )
+        images = Image.objects.filter(
+            Q(car__brand__contains=brand)
+        )
         serializer = CarSerializer(cars, many=True)
-        return Response(serializer.data)
+        serializer2 = ImageSerializer(images, many=True)
+        serializerList = [serializer.data, serializer2.data]
+        return Response(serializerList)
+
+@api_view(['GET'])
+def getBrands(request):
+    cars = Car.objects.all()
+    brands = {car.brand for car in cars}
+    return Response(brands)
+
 
 @api_view(['GET'])
 def getCarsByBrand(request, brand):
@@ -97,5 +136,8 @@ def getCarsByZone(request, zone):
 @api_view(['GET'])
 def getCarById(request, pk):
     car = Car.objects.get(id=pk)
+    images = Image.objects.get(car_id=pk)
     serializer = CarSerializer(car, many=False)
-    return Response(serializer.data)
+    serializer2 = ImageSerializer(images, many=False)
+    serializerList = {'details': serializer.data, 'image': serializer2.data}
+    return Response(serializerList)

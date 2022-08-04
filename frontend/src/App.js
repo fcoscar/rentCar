@@ -7,6 +7,7 @@ import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
 import CarPage from './pages/CarPage';
 import UploadPage from './pages/UploadPage';
+import UploadImagesPage from './pages/UploadImagesPage';
 
 function App() {
   return (
@@ -16,8 +17,9 @@ function App() {
         <Route path='/' element={<HomePage />} exact/>
         <Route path='/login' element={<LoginPage />} />
         <Route path='/signup' element={<SignUpPage />} />
-        <Route path='/cars/:carId' element={<CarPage />}></Route>
+        <Route path='/car/:carId' element={<CarPage />}></Route>
         <Route path='/list-car' element={<UploadPage />}></Route>
+        <Route path='/upload-images' element={<UploadImagesPage />}/>
       </Routes>
     </Router>
   );
