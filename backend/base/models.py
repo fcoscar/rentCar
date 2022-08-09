@@ -56,6 +56,5 @@ class Image(models.Model):
     class Meta:
         ordering = ['-car_id']
 
-
     def __str__(self):
         return str(self.car.name)

@@ -5,7 +5,7 @@ import { createCar } from '../actions/car'
 import { Navigate, useNavigate } from 'react-router-dom'
 
 function UploadPage() {
-    const [type, setType] = useState('tipo...')
+    const [type, setType] = useState('Jeepeta')
     const [brand ,setBrand] = useState('')
     const [model, setModel] = useState('')
     const [location, setLocation] = useState('')
@@ -15,7 +15,7 @@ function UploadPage() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const submitHandler =  (e) => {
+    const submitHandler = (e) => {
         dispatch(createCar(type,brand,model,location,combustible,price,year))
         navigate('/upload-images')
     }
@@ -26,7 +26,7 @@ function UploadPage() {
         <div className='w-96 p-6 rounded shadow-md border-black border'>
             <form onSubmit={submitHandler}>
             <label>Tipo de Vehiculo</label>
-            <select onChange={(e) => setType(e.target.value)} className="w-full py-2 bg-gray-100 text-gray-500 px-1 outline-none mb-4">
+            <select onChange={(e) => setType(e.target.value)} value={type} className="w-full py-2 bg-gray-100 text-gray-500 px-1 outline-none mb-4">
             {vehicleTypes.map((type, id) => (
                 <option key={id} value={type}>{type}</option>
             ))}
@@ -55,8 +55,6 @@ function UploadPage() {
                     className='w-full py-2 bg-gray-100 text-gray-500 px-1 outline-none mb-4'
                     onChange={(e) => setPrice(e.target.value)}
                 />
-                <label>Fotos</label>
-
                 
                 <label>Ubicacion</label>
                 <input 
@@ -72,7 +70,7 @@ function UploadPage() {
                     onChange={(e) => setYear(e.target.value)}
                 />
 
-                <button type='submit' className='w-full rounded-full py-2 text-xs uppercase font-bold tracking-wider border-black border-2 hover:bg-gray-100 transition-colors' >Subir</button>
+                <button type='submit' className='w-full rounded-full py-2 text-xs uppercase font-bold tracking-wider border-black border-2 hover:bg-gray-100 transition-colors' >Siguiente</button>
             </form>
         </div>
     </div>

@@ -72,12 +72,23 @@ def createCar(request):
     return Response(serializer.data)
 
 @api_view(['GET'])
-def updateCar(request):
+def carCreated(request):
     user = request.user
     car = Car.objects.filter(user__username=user.username)[0]
     serializer = CarSerializer(car, many=False)
-
     return Response(serializer.data)
+
+@api_view(['POST'])
+def uploadCarImage(request):
+    data = request.data
+    user = request.user
+    car = Car.objects.filter(user=user)[0]
+    print(car)
+    image = Image.objects.create(
+        car = car,
+        image = request.FILES.get('image')
+    )
+    return Response('Image Uploaded')
 
 @api_view(['GET'])
 def getAllCars(request):
@@ -107,7 +118,6 @@ def getBrands(request):
     cars = Car.objects.all()
     brands = {car.brand for car in cars}
     return Response(brands)
-
 
 @api_view(['GET'])
 def getCarsByBrand(request, brand):

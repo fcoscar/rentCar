@@ -20,7 +20,7 @@ function LoginPage() {
 
   return (
 
-    <div className='flex items-center justify-center h-80 '>
+    <div className='flex items-center justify-center h-80'>
         <form onSubmit={submitHandler}>
             <div className='w-96 p-6 rounded shadow-md border-black border'>
                 <label className='text-xs uppercase font-bold tracking-wider'>Nombre de Usuario</label>

@@ -8,8 +8,7 @@ import { userLoginReducer, userRgisterReducer } from './reducers/userReducer'
         userLogin: userLoginReducer,
         carDetails: carDetailsReducer,
         userRegister: userRgisterReducer,
-        carCreate: carCreateReducer,
-        carCreated: carCreatedReducer
+        carCreate: carCreateReducer
     })
 
     const userInfoFromStorage = localStorage.getItem('userInfo') ? 

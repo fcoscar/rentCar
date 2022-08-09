@@ -10,15 +10,16 @@ function CarPage() {
     const dispatch = useDispatch()
     const carDetails = useSelector(state => state.carDetails)
     const {error, loading, car} = carDetails
+    console.log(carId)
 
     useEffect(() => {
         dispatch(getCarById(carId))
-    }, [carId, dispatch])
+    }, [dispatch, carId ])
   return (
     <div>
         <div>
             <div className='text-4xl font-semibold px-4 mt-5 whitespace-nowrap ml-12'>
-                {car?.name} - {car?.year}
+                {car?.details?.name} - {car?.details?.year}
             </div>
             <div className=' px-4 flex ml-12'>
              <StarIcon className='h-5 w-5'/>  4.7 - 12 reviews - {car?.location}
@@ -27,30 +28,30 @@ function CarPage() {
 
         <div className='flex ml-16 space-x-16'>
                 <div className='' >
-                    <img src={car?.image} />
+                    <img src={car?.image?.image} alt='error'/>
                 </div>
 
             <div className='flex border border-gray-300  rounded-lg shadow-lg'>
                 <div className=''>
                     <h1 className='text-xl uppercase font-bold tracking-wider text-gray-500'>Datos Generales</h1>
-                    <h1><strong>Precio:</strong> ${car?.price} / Dia</h1>
-                    <h1><strong>Traccion:</strong> {car?.traccion}</h1>
-                    <h1><strong>Transmisiom:</strong> {car?.transmission}</h1>
-                    <h1><strong>Combustible:</strong> {car?.combustible}</h1>
-                    <h1><strong>Color exterior:</strong> {car?.exterior}</h1>
-                    <h1><strong>Color interior:</strong> {car?.interior}</h1>
+                    <h1><strong>Precio:</strong> ${car?.details?.price} / Dia</h1>
+                    <h1><strong>Traccion:</strong> {car?.details?.traccion}</h1>
+                    <h1><strong>Transmisiom:</strong> {car?.details?.transmission}</h1>
+                    <h1><strong>Combustible:</strong> {car?.details?.combustible}</h1>
+                    <h1><strong>Color exterior:</strong> {car?.details?.exterior}</h1>
+                    <h1><strong>Color interior:</strong> {car?.details?.interior}</h1>
                 </div>
                 <div className=''>
-                    <h1><strong>Tipo:</strong> {car?.type}</h1>
-                    <h1><strong>Pasajeros:</strong> {car?.passengers}</h1>
-                    <h1><strong>Puertas:</strong> {car?.doors}</h1>
-                    <h1><strong>Kilometraje:</strong> {car?.kilometraje} kms</h1>
+                    <h1><strong>Tipo:</strong> {car?.details?.type}</h1>
+                    <h1><strong>Pasajeros:</strong> {car?.details?.passengers}</h1>
+                    <h1><strong>Puertas:</strong> {car?.details?.doors}</h1>
+                    <h1><strong>Kilometraje:</strong> {car?.details?.kilometraje} kms</h1>
                 </div>
 
             </div>
             <div className='border border-gray-300  rounded-lg shadow-lg w-96  '>
                 <h1 className='text-xl uppercase font-bold tracking-wider text-gray-500'>Descripcion/ Detalles </h1>
-                <p className=''>{car?.description}</p>    
+                <p className=''>{car?.details?.description}</p>    
             </div>
 
         </div>

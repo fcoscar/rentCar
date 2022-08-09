@@ -50,16 +50,3 @@ export const carCreateReducer = (state = {}, action) => {
     }
     
 }
-
-export const carCreatedReducer = (state = { carCreated: {}}, action) => {
-    switch(action.type){
-        case CAR_GET_UPDATE_IMAGE_REQUEST:
-            return { laoding: true, ...state}
-        case CAR_GET_UPDATE_IMAGE_SUCCESS:
-            return { loading: false, car: action.payload }
-        case CAR_GET_UPDATE_IMAGE_FAIL:
-            return { loading: false, error: action.payload }
-        default:
-            return state
-    }
-}

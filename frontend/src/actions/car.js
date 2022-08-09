@@ -7,6 +7,7 @@ import {
 
 } from '../constants/carConstants'
 
+
 export const getAll = (brand) => async (dispatch) => {
     try {
         
@@ -107,38 +108,3 @@ export const createCar = (type,brand,model,location,combustible,price,year) => a
         })   
     }
 } 
-
-export const getCarCreated = () => async (dispatch, getState) => {
-    try {
-
-        dispatch({
-            type: CAR_GET_UPDATE_IMAGE_REQUEST
-        })
-
-        const { userLogin: {userInfo} } = getState()
-        const token = 'Bearer ' + userInfo.token
-
-        const request = await fetch('car/register/update-image' , {
-            headers: {
-                'Content-type': 'application/json',
-                'Authorization': token
-            }
-        })
-        const data = await request.json()
-        console.log(data)
-
-        dispatch({
-            type: CAR_GET_UPDATE_IMAGE_SUCCESS,
-            payload: data
-        })
-        
-    } catch (error) {
-        dispatch({
-            type:CAR_GET_UPDATE_IMAGE_FAIL,
-            payload: error.response && error.response.data.message
-            ? error.response.data.message : error.message
-        })   
-    }
-    
-
-}
