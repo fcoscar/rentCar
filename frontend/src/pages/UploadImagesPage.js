@@ -1,12 +1,12 @@
-import React, {useEffect, useState} from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import React, {useState} from 'react'
+import { useNavigate} from 'react-router-dom'
+import { useSelector} from 'react-redux'
 import axios from 'axios'
 
 function UploadImagesPage() {
-    const dispatch = useDispatch()
 
     const [file, setFile] = useState('')
+    const [response,setResponse] = useState(null)
 
     const userLogin= useSelector(state => state.userLogin)
     const {userInfo} = userLogin
@@ -14,27 +14,33 @@ function UploadImagesPage() {
     
     const handleFile = async (e) => {
       setFile(e.target.files[0])
-      console.log(file)
     }
 
     const submitHandler = async (e) => {
+      e.preventDefault()
       const fileToSend = file
       const formData = new FormData()
 
       formData.append('image', fileToSend)
 
       try {
-        const config = {
+
+        axios.post('https://api.imgbb.com/1/upload?expiration=600&key=abadfd0638d44a30ecd1238a605f8d34', formData)
+          .then((data) => {
+            setResponse(data)        
+          })
+        console.log('Image Uploaded')
+        await fetch('http://127.0.0.1:8000/api/car/register/upload-image/', {
+          method: 'POST',
+          body: JSON.stringify({
+            image: response.data.data.url
+          }),
           headers:{
-            'Content-Type':'multipart/form-data',
+            'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + userInfo.token
           }
-        }
-
-        const {data} = axios.post('http://127.0.0.1:8000/api/car/register/upload-image/', formData, config)
-
-        console.log('Image Uploaded')
-
+          
+        })
 
       } catch (error) {
         console.log('Error')

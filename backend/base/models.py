@@ -52,6 +52,12 @@ class Review(models.Model):
 class Image(models.Model):
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
     image = models.ImageField(null=True, blank=True)
+    class Meta:
+        ordering = ['-car_id']
+
+class ImageUrl(models.Model):
+    car = models.ForeignKey(Car, on_delete=models.CASCADE)
+    image_url = models.CharField(max_length=200, null=True, blank=True)
 
     class Meta:
         ordering = ['-car_id']

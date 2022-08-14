@@ -22,13 +22,13 @@ function CarPage() {
                 {car?.details?.name} - {car?.details?.year}
             </div>
             <div className=' px-4 flex ml-12'>
-             <StarIcon className='h-5 w-5'/>  4.7 - 12 reviews - {car?.location}
+             <StarIcon className='h-5 w-5'/>  4.7 - 12 reviews - {car?.details?.location}
             </div>
         </div>
 
         <div className='flex ml-16 space-x-16'>
                 <div className='' >
-                    <img src={car?.image?.image} alt='error'/>
+                    <img src={car?.image?.image_url} alt='error'/>
                 </div>
 
             <div className='flex border border-gray-300  rounded-lg shadow-lg'>

@@ -103,7 +103,7 @@ function Header() {
       
       <div className='bg-neutral-50 flex justify-between flex-nowrap space px-4 py-3 shadow-sm border-y '>
       <div> 
-        <a href='/'> <img className='relative h-10 w-20 ml-12' src='http://localhost:8000/static/images/W.jpg' alt=''/></a>
+        <a href='/'> <img className='relative h-10 w-20 ml-12' src='https://i.ibb.co/2jb1xdD/W.jpg' alt=''/></a>
       </div>
       {/* <form className='flex flex-1 items-center space-x-2 rounded-xl border border-gray-500 bg-gray-100 px-3 py-1'>
         <input 

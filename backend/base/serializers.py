@@ -47,3 +47,8 @@ class ImageSerializer(ModelSerializer):
     class Meta:
         model = Image
         fields = '__all__'
+
+class ImageUrlSerializer(ModelSerializer):
+    class Meta:
+        model = ImageUrl
+        fields = '__all__'
