@@ -25,11 +25,10 @@ function UploadImagesPage() {
 
       try {
 
-        axios.post('https://api.imgbb.com/1/upload?expiration=600&key=abadfd0638d44a30ecd1238a605f8d34', formData)
+        await axios.post('https://api.imgbb.com/1/upload?key=abadfd0638d44a30ecd1238a605f8d34', formData)
           .then((data) => {
             setResponse(data)        
           })
-        console.log('Image Uploaded')
         await fetch('http://127.0.0.1:8000/api/car/register/upload-image/', {
           method: 'POST',
           body: JSON.stringify({
