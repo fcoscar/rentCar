@@ -43,7 +43,7 @@ function HomePage() {
         </div> */}
 
         {loading ? (
-          <div className='grid sm:grid-cols-3 lg:grid-cols-5 md:grid-cols-4 xl:grid-cols-6 ml-10 mr-14 '>
+          <div className='grid sm:grid-cols-2 lg:grid-cols-4 md:grid-cols-3 xl:grid-cols-4 ml-10 mr-14 '>
             <Skeleton /><Skeleton />
             <Skeleton /><Skeleton />
             <Skeleton /><Skeleton />
@@ -56,7 +56,7 @@ function HomePage() {
             <Skeleton /><Skeleton />
           </div>
         ) : (
-          <div className='grid sm:grid-cols-3 lg:grid-cols-4 md:grid-cols-3 xl:grid-cols-5 ml-10 mr-14'>
+          <div className='grid sm:grid-cols-2 lg:grid-cols-4 md:grid-cols-3 xl:grid-cols-4 ml-10 mr-14'>
           {cars[0]?.map((car, i) => 
           <div key={i} className='ml-5' >
             <Cards car={car} image={cars[1][i]}/>
