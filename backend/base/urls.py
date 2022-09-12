@@ -7,10 +7,10 @@ from .views import MyTokenObtainPairView
 
 urlpatterns = [
     path('', views.getRoutes),
-    path('users/login/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('users/login', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('users/register/', views.createUser),
     path('car/register/', views.createCar),
-    path('car/<str:pk>/', views.getCarById),
+    path('car/<str:pk>', views.getCarById),
     path('car/register/car-created', views.carCreated),
     path('car/register/upload-image/', views.uploadCarImageUrl),
     path('brands', views.getBrands),

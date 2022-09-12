@@ -109,7 +109,7 @@ def uploadCarImageUrl(request):
 
 @api_view(['GET'])
 def getAllCars(request):
-    brand = request.GET.get('brand') if request.GET.get('brand') is not None else ''
+    brand = request.GET.get('brand') if request.GET.get('brand') is not None else 'All'
     if brand == 'All':
         cars = Car.objects.all().order_by('-id')
         images = ImageUrl.objects.all().order_by('-car_id')
